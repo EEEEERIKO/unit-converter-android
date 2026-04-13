@@ -1,83 +1,162 @@
-# 📱 Parcial Android – Conversora de Unidades
+# 📱 Android Project – Unit Converter App
 
-## 👨‍💻 Integrante
-- Erik Valencia Cardona
+## 👨‍💻 Author
 
----
-
-## 📌 Descripción del proyecto
-
-Este proyecto consiste en una aplicación móvil desarrollada en Android utilizando **Kotlin** y **Jetpack Compose**. 
-
-La aplicación permite al usuario registrarse mediante un formulario básico y posteriormente acceder a una conversora de unidades organizada en diferentes pestañas.
+* Erik Valencia Cardona
 
 ---
 
-## 🧩 Estructura de la aplicación
+## 📌 Project Description
 
-### 📝 Pantalla de Registro
-- Formulario simple con:
-  - Nombre
-  - Email
-- Botón de registro
-- Redirección a la pantalla principal (conversora)
+This project is an Android mobile application built using **Kotlin** and **Jetpack Compose**.
+
+The app allows users to register through a simple form and then access a **unit converter** with multiple categories and flexible unit selection using dropdown menus.
 
 ---
 
-### 🔄 Pantalla de Conversora
+## 🧩 Application Structure
 
-Se implementa mediante un sistema de pestañas (**TabRow**) con tres categorías:
+The project follows a **modular architecture**, separating responsibilities into different layers:
 
-#### 📏 Longitud
-- Conversión:
-  - Centímetros → Pulgadas
-- Fórmula: inches = cm / 2.54
+```
+data/        → Unit definitions
+domain/      → Conversion logic
+ui/          → Screens and reusable components
+navigation/  → Navigation logic
+```
 
----
-
-#### ⚖️ Masa
-- Conversión:
-  - Kilogramos → Libras
-- Fórmula: lbs = kg * 2.20462
+This improves scalability, readability, and maintainability.
 
 ---
 
-#### 🌡️ Temperatura (Libre elección)
-- Conversión:
-  - Celsius → Fahrenheit
-- Fórmula: °F = (°C * 9/5) + 32
+## 📝 Registration Screen
+
+* Simple form with:
+
+  * Name
+  * Email
+* Register button
+* Navigates to the converter screen
 
 ---
 
-## ⚙️ Tecnologías utilizadas
+## 🔄 Converter Screen
 
-- Kotlin
-- Jetpack Compose
-- Navigation Compose
-- Material 3
+Implemented using **TabRow**, with three categories:
 
----
+### 📏 Length
 
-## 🧠 Funcionamiento
+### ⚖️ Mass
 
-- La navegación entre pantallas se gestiona con `NavHost` y `NavController`.
-- El estado se maneja con `remember` y `mutableStateOf`.
-- Cada pestaña tiene su propia lógica de conversión independiente.
-- La interfaz sigue un enfoque declarativo con Compose.
+### 🌡️ Temperature
+
+Each tab uses a **reusable component** (`ConverterTab`) to avoid code duplication.
 
 ---
 
-## 📊 Criterios de evaluación cumplidos
+## 🔁 Dynamic Unit Conversion
 
-- ✅ Pantalla de registro (1.0)
-- ✅ Conversión de longitud (1.3)
-- ✅ Conversión de masa (1.3)
-- ✅ Conversión libre (temperatura) (1.4)
+Unlike the initial version, the app now supports:
+
+* ✅ Multiple units per category
+* ✅ Bidirectional conversion (any unit → any unit)
+* ✅ Dropdown selectors for:
+
+  * "From" unit
+  * "To" unit
 
 ---
 
-## 🚀 Ejecución del proyecto
+## 🧱 Reusable Components
 
-1. Clonar el repositorio:
+### 🔽 UnitDropdown
+
+* Built using `ExposedDropdownMenuBox`
+* Allows selecting units dynamically
+* Fully reusable across all tabs
+
+---
+
+### 🔄 ConverterTab
+
+* Generic composable used for all categories
+* Receives:
+
+  * Title
+  * List of units
+* Handles:
+
+  * Input
+  * Unit selection
+  * Conversion
+  * Result display
+
+---
+
+## ⚙️ Technologies Used
+
+* Kotlin
+* Jetpack Compose
+* Navigation Compose
+* Material 3
+
+---
+
+## 🧠 How It Works
+
+* Navigation is handled using `NavHost` and `NavController`
+* UI state is managed with `remember` and `mutableStateOf`
+* Conversion logic is abstracted using:
+
+  * `UnitOption` (data model)
+  * `convert()` function (domain layer)
+* Each unit converts through a **base unit system**, allowing scalable conversions
+
+---
+
+## 📊 Features Implemented
+
+* ✅ User registration screen
+* ✅ Tab-based navigation
+* ✅ Length conversion
+* ✅ Mass conversion
+* ✅ Temperature conversion
+* ✅ Dynamic unit selection (dropdowns)
+* ✅ Reusable composables
+* ✅ Clean architecture (data / domain / ui separation)
+
+---
+
+## 🚀 How to Run the Project
+
+1. Clone the repository:
+
 ```bash
-git clone <URL_DEL_REPOSITORIO>
+git clone <YOUR_REPOSITORY_URL>
+```
+
+2. Open the project in **Android Studio**
+
+3. Sync Gradle
+
+4. Run the app on:
+
+   * Emulator OR
+   * Physical device
+
+---
+
+## 💡 Notes
+
+* The project was refactored to follow better development practices
+* Focus was placed on:
+
+  * Code reuse
+  * Clean structure
+  * Scalability
+
+---
+
+## 🏁 Conclusion
+
+This project demonstrates the implementation of a modern Android application using **Jetpack Compose**, applying clean architecture principles and reusable UI components to build a flexible and scalable unit converter.
